@@ -29,17 +29,34 @@ const translations: Record<string, any> = {
 
 const languages = [{ code: 'en', native: 'English', flag: '🇺🇸' }, { code: 'zh', native: '中文', flag: '🇨🇳' }, { code: 'ja', native: '日本語', flag: '🇯🇵' }, { code: 'ko', native: '한국어', flag: '🇰🇷' }, { code: 'fr', native: 'Français', flag: '🇫🇷' }, { code: 'de', native: 'Deutsch', flag: '🇩🇪' }]
 
-// Nightfall Logo - Custom SVG Design
+// 高清图片资源 - 来自 Unsplash（免费商用）
+const images = {
+  // Hero 背景图 - 温暖的居家宠物场景
+  hero: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1920&q=80',
+  // 产品图 - 猫咪
+  cat: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&q=80',
+  // 产品图 - 狗狗
+  dog: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=800&q=80',
+  // 故事配图 - 陪伴场景
+  story: 'https://images.unsplash.com/photo-1534361960057-19889db9621e?w=1200&q=80',
+  // 价值图 - 温暖居家
+  warmth: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=600&q=80',
+  // 价值图 - 夜晚陪伴
+  companionship: 'https://images.unsplash.com/photo-1513245543132-31f507417b26?w=600&q=80',
+  // 价值图 - 日常生活
+  daily: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=600&q=80',
+  // 页脚背景
+  footer: 'https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?w=1920&q=80'
+}
+
+// Nightfall Logo
 function NightfallLogo({ className = "h-8" }: { className?: string }) {
   return (
     <svg viewBox="0 0 140 40" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Crescent Moon */}
       <path d="M18 6C18 6 14 4 10 6C6 8 4 12 4 16C4 20 6 24 10 26C14 28 18 26 18 26" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      {/* Small Stars */}
       <path d="M26 10L26.5 11L27.5 11L26.5 11.5L26 12.5L25.5 11.5L24.5 11L25.5 11L26 10Z" fill="currentColor"/>
       <path d="M32 18L32.4 18.8L33.2 18.8L32.4 19.2L32 20L31.6 19.2L30.8 19.2L31.6 18.8L32 18Z" fill="currentColor" opacity="0.7"/>
       <path d="M28 6L28.4 6.8L29.2 6.8L28.4 7.2L28 8L27.6 7.2L26.8 7.2L27.6 6.8L28 6Z" fill="currentColor" opacity="0.5"/>
-      {/* Brand Name */}
       <text x="42" y="26" fontFamily="Georgia, serif" fontSize="20" fontWeight="500" fill="currentColor" letterSpacing="3">NIGHTFALL</text>
     </svg>
   )
@@ -51,11 +68,29 @@ export default function Home() {
   const [showLangDropdown, setShowLangDropdown] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
+  const [imagesLoaded, setImagesLoaded] = useState(false)
   const t = translations[lang]
 
   useEffect(() => {
     const saved = localStorage.getItem('nightfall_lang')
     setLang(saved && translations[saved] ? saved : 'en')
+
+    // 预加载图片
+    const loadImages = () => {
+      const imageUrls = Object.values(images)
+      let loaded = 0
+      imageUrls.forEach(url => {
+        const img = new Image()
+        img.src = url
+        img.onload = () => {
+          loaded++
+          if (loaded === imageUrls.length) {
+            setImagesLoaded(true)
+          }
+        }
+      })
+    }
+    loadImages()
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
@@ -90,8 +125,6 @@ export default function Home() {
         <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] bg-gradient-to-bl from-stone-100/80 via-amber-50/40 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }} />
         <div className="absolute -bottom-40 left-1/4 w-[700px] h-[700px] bg-gradient-to-t from-stone-200/50 via-stone-100/30 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '2s' }} />
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #44403c 1px, transparent 0)', backgroundSize: '48px 48px' }} />
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-amber-200/40 rounded-full blur-sm animate-bounce" style={{ animationDuration: '6s' }} />
-        <div className="absolute top-2/3 right-1/4 w-1.5 h-1.5 bg-stone-300/40 rounded-full blur-sm animate-bounce" style={{ animationDuration: '7s', animationDelay: '0.5s' }} />
       </div>
 
       <div className="relative z-10">
@@ -136,37 +169,72 @@ export default function Home() {
           </div>
         </nav>
 
-        {/* Hero */}
-        <section id="hero" className={`relative pt-44 pb-32 px-6 transition-all duration-1000 ${visibleSections.has('hero') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-stone-500 text-xs tracking-[0.25em] uppercase mb-8">{t.hero.subtitle}</p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-stone-900 mb-10 leading-[1.05] whitespace-pre-line tracking-tight">{t.hero.title}</h1>
-            <p className="text-lg text-stone-600 mb-12 max-w-2xl mx-auto leading-relaxed">{t.hero.description}</p>
-            <Link href="#products" className="inline-flex items-center gap-3 bg-gradient-to-r from-stone-900 to-stone-800 text-stone-50 px-12 py-5 rounded-full hover:from-stone-800 hover:to-stone-700 transition-all duration-500 group shadow-2xl shadow-stone-900/20 hover:shadow-stone-900/30 hover:scale-105">
+        {/* Hero Section with Background Image */}
+        <section id="hero" className={`relative h-screen flex items-center justify-center overflow-hidden transition-all duration-1000 ${visibleSections.has('hero') ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0">
+            <img
+              src={images.hero}
+              alt="Pets companionship"
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-stone-900/60 via-stone-900/40 to-stone-900/70" />
+          </div>
+          
+          {/* Content */}
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
+            <p className="text-stone-200 text-xs tracking-[0.25em] uppercase mb-8 animate-fade-in">{t.hero.subtitle}</p>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-10 leading-[1.05] whitespace-pre-line tracking-tight drop-shadow-2xl">{t.hero.title}</h1>
+            <p className="text-lg text-stone-200/90 mb-12 max-w-2xl mx-auto leading-relaxed">{t.hero.description}</p>
+            <Link href="#products" className="inline-flex items-center gap-3 bg-white/95 text-stone-900 px-12 py-5 rounded-full hover:bg-white transition-all duration-500 group shadow-2xl hover:scale-105">
               {t.hero.cta}<ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
-        </section>
 
-        {/* Story */}
-        <section id="story" className={`py-32 px-6 transition-all duration-1000 ${visibleSections.has('story') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-center gap-3 mb-16 text-stone-500">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-100 to-stone-100 flex items-center justify-center">
-                <Moon size={20} strokeWidth={1.5} className="text-stone-700" />
-              </div>
-              <span className="text-xs tracking-[0.2em] uppercase">{t.story.label}</span>
-            </div>
-            <div className="space-y-8 text-stone-700 leading-relaxed bg-white/80 backdrop-blur-xl p-12 rounded-3xl border border-white/60 shadow-2xl">
-              {t.story.content.map((p: string, i: number) => (
-                <p key={i} className={`text-lg ${i === 0 ? 'text-xl text-stone-800 font-medium' : ''} ${i === 2 ? 'pl-6 border-l-2 border-amber-300 italic' : ''}`}>{p}</p>
-              ))}
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2">
+              <div className="w-1 h-2 bg-white/60 rounded-full animate-pulse" />
             </div>
           </div>
         </section>
 
-        {/* Products */}
-        <section id="products" className={`py-32 px-6 bg-white/70 backdrop-blur-sm border-y border-white/30 transition-all duration-1000 ${visibleSections.has('products') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        {/* Story Section */}
+        <section id="story" className={`py-32 px-6 transition-all duration-1000 ${visibleSections.has('story') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="flex items-center gap-3 mb-8 text-stone-500">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-100 to-stone-100 flex items-center justify-center">
+                    <Moon size={20} strokeWidth={1.5} className="text-stone-700" />
+                  </div>
+                  <span className="text-xs tracking-[0.2em] uppercase">{t.story.label}</span>
+                </div>
+                <div className="space-y-6 text-stone-700 leading-relaxed">
+                  {t.story.content.map((p: string, i: number) => (
+                    <p key={i} className={`text-lg ${i === 0 ? 'text-xl text-stone-800 font-medium' : ''} ${i === 2 ? 'pl-6 border-l-2 border-amber-300 italic' : ''}`}>{p}</p>
+                  ))}
+                </div>
+              </div>
+              <div className="relative">
+                <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-stone-900/10">
+                  <img
+                    src={images.story}
+                    alt="Dog and owner companionship"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-amber-100/60 to-stone-200/40 rounded-full blur-2xl" />
+                <div className="absolute -top-6 -right-6 w-40 h-40 bg-gradient-to-bl from-stone-100/60 to-amber-200/40 rounded-full blur-2xl" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Products Section */}
+        <section id="products" className={`py-32 px-6 bg-white/80 backdrop-blur-sm border-y border-white/30 transition-all duration-1000 ${visibleSections.has('products') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center gap-3 mb-20 text-stone-500">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-100 to-stone-100 flex items-center justify-center">
@@ -175,17 +243,43 @@ export default function Home() {
               <span className="text-xs tracking-[0.2em] uppercase">{t.products.label}</span>
             </div>
             <div className="grid md:grid-cols-2 gap-16">
-              {[t.products.sleepwear, t.products.homewear].map((product, i) => (
-                <div key={i} className="group cursor-pointer">
-                  <div className="aspect-[4/5] bg-gradient-to-br from-amber-50 via-stone-100 to-stone-50 rounded-3xl mb-8 flex items-center justify-center relative overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-br from-amber-100/0 to-amber-200/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <span className="text-7xl opacity-60 relative z-10 group-hover:scale-110 transition-transform duration-500">{i === 0 ? '🌙' : '🏠'}</span>
+              {/* Product 1 - Cat */}
+              <div className="group cursor-pointer">
+                <div className="aspect-[4/5] rounded-3xl mb-8 overflow-hidden relative shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                  <img
+                    src={images.cat}
+                    alt="Cat in cozy sleepwear"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-6 left-6 right-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-sm">Soft & Comfortable</p>
                   </div>
-                  <h3 className="text-2xl font-serif text-stone-900 mb-3">{product.title}</h3>
-                  <p className="text-stone-500 mb-4">{product.description}</p>
-                  <p className={`font-medium text-lg ${i === 1 ? 'text-stone-500 italic' : 'text-stone-900'}`}>{product.price}</p>
                 </div>
-              ))}
+                <h3 className="text-2xl font-serif text-stone-900 mb-3">{t.products.sleepwear.title}</h3>
+                <p className="text-stone-500 mb-4">{t.products.sleepwear.description}</p>
+                <p className="text-stone-900 font-medium text-lg">{t.products.sleepwear.price}</p>
+              </div>
+
+              {/* Product 2 - Dog */}
+              <div className="group cursor-pointer">
+                <div className="aspect-[4/5] rounded-3xl mb-8 overflow-hidden relative shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                  <img
+                    src={images.dog}
+                    alt="Dog in cozy sleepwear"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-6 left-6 right-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-sm">Perfect for Rest</p>
+                  </div>
+                </div>
+                <h3 className="text-2xl font-serif text-stone-900 mb-3">{t.products.homewear.title}</h3>
+                <p className="text-stone-500 mb-4">{t.products.homewear.description}</p>
+                <p className="text-stone-500 italic text-lg">{t.products.homewear.price}</p>
+              </div>
             </div>
             <div className="text-center mt-20">
               <p className="text-stone-500 text-sm mb-8">{t.products.comingSoon}</p>
@@ -194,26 +288,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Values */}
+        {/* Values Section with Images */}
         <section id="values" className={`py-32 px-6 transition-all duration-1000 ${visibleSections.has('values') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-16">
-            {[{ icon: Heart, ...t.values.warmth }, { icon: Moon, ...t.values.companionship }, { icon: HomeIcon, ...t.values.daily }].map((v, i) => (
-              <div key={i} className="text-center group">
-                <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-amber-100/90 to-stone-100/90 backdrop-blur flex items-center justify-center border border-white/70 shadow-xl group-hover:shadow-2xl group-hover:scale-110 transition-all duration-500">
-                  <v.icon size={32} strokeWidth={1.5} className="text-stone-700" />
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { icon: Heart, ...t.values.warmth, image: images.warmth },
+                { icon: Moon, ...t.values.companionship, image: images.companionship },
+                { icon: HomeIcon, ...t.values.daily, image: images.daily }
+              ].map((v, i) => (
+                <div key={i} className="group text-center">
+                  <div className="aspect-square rounded-2xl mb-6 overflow-hidden relative">
+                    <img
+                      src={v.image}
+                      alt={v.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                  </div>
+                  <div className="w-16 h-16 mx-auto -mt-12 mb-4 rounded-full bg-white/95 backdrop-blur flex items-center justify-center border-4 border-white shadow-xl relative z-10">
+                    <v.icon size={28} strokeWidth={1.5} className="text-stone-700" />
+                  </div>
+                  <h3 className="font-serif text-2xl text-stone-900 mb-4">{v.title}</h3>
+                  <p className="text-stone-600">{v.desc}</p>
                 </div>
-                <h3 className="font-serif text-2xl text-stone-900 mb-4">{v.title}</h3>
-                <p className="text-stone-600">{v.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Footer */}
         <footer id="about" className="py-20 px-6 bg-stone-900 text-stone-400 relative overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-amber-900/15 to-transparent rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-stone-800/40 to-transparent rounded-full blur-3xl" />
+          <div className="absolute inset-0 opacity-20">
+            <img src={images.footer} alt="Night sky" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/80 to-stone-900/60" />
           </div>
           <div className="max-w-6xl mx-auto relative z-10">
             <div className="grid md:grid-cols-3 gap-16 mb-16">
