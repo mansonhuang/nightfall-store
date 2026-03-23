@@ -49,18 +49,18 @@ const images = {
   footer: 'https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?w=1920&q=80'
 }
 
-// Nightfall Logo - Optimized for full visibility
+// Nightfall Logo - Fixed for full visibility
 function NightfallLogo({ className = "h-8" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 160 40" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Crescent Moon */}
-      <path d="M20 8C20 8 16 5 12 7C8 9 6 13 6 17C6 21 8 25 12 27C16 29 20 26 20 26" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      {/* Small Stars */}
-      <path d="M28 10L28.5 11L29.5 11L28.5 11.5L28 12.5L27.5 11.5L26.5 11L27.5 11L28 10Z" fill="currentColor"/>
-      <path d="M34 18L34.4 18.8L35.2 18.8L34.4 19.2L34 20L33.6 19.2L32.8 19.2L33.6 18.8L34 18Z" fill="currentColor" opacity="0.7"/>
-      <path d="M30 6L30.4 6.8L31.2 6.8L30.4 7.2L30 8L29.6 7.2L28.8 7.2L29.6 6.8L30 6Z" fill="currentColor" opacity="0.5"/>
-      {/* Brand Name - NIGHTFALL */}
-      <text x="44" y="28" fontFamily="Georgia, serif" fontSize="22" fontWeight="500" fill="currentColor" letterSpacing="4">NIGHTFALL</text>
+    <svg viewBox="0 0 200 50" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Crescent Moon - Larger and clearer */}
+      <path d="M25 10C25 10 20 6 15 9C10 12 8 17 8 22C8 27 10 32 15 35C20 38 25 34 25 34" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+      {/* Stars - More visible */}
+      <path d="M32 14L32.6 15.2L34 15.2L32.6 16L32 17.5L31.4 16L30 15.2L31.4 15.2L32 14Z" fill="currentColor"/>
+      <path d="M38 22L38.5 23L39.5 23L38.5 23.5L38 24.5L37.5 23.5L36.5 23L37.5 23L38 22Z" fill="currentColor" opacity="0.7"/>
+      <path d="M34 8L34.4 8.8L35.2 8.8L34.4 9.2L34 10L33.6 9.2L32.8 9.2L33.6 8.8L34 8Z" fill="currentColor" opacity="0.5"/>
+      {/* Brand Name - NIGHTFALL with better spacing */}
+      <text x="48" y="32" fontFamily="Georgia, serif" fontSize="24" fontWeight="500" fill="currentColor" letterSpacing="2">NIGHTFALL</text>
     </svg>
   )
 }
