@@ -109,12 +109,30 @@ const translations = {
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'zh'>('zh')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [showLangTip, setShowLangTip] = useState(true)
   const t = translations[lang]
 
   return (
     <main className="min-h-screen bg-stone-50">
+      {/* Language Tip Banner */}
+      {showLangTip && (
+        <div className="fixed top-0 left-0 right-0 z-[60] bg-stone-900 text-stone-50 px-6 py-3 text-sm">
+          <div className="max-w-6xl mx-auto flex justify-between items-center">
+            <p className="opacity-90">
+              {lang === 'en' ? '🌐 Language switch available' : '🌐 右上角可切换语言'}
+            </p>
+            <button
+              onClick={() => setShowLangTip(false)}
+              className="text-stone-400 hover:text-stone-50 transition-colors"
+            >
+              <X size={16} />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-stone-50/80 backdrop-blur-md z-50 border-b border-stone-200/50">
+      <nav className={`fixed w-full bg-stone-50/80 backdrop-blur-md z-50 border-b border-stone-200/50 transition-all duration-300 ${showLangTip ? 'top-10' : 'top-0'}`}>
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <Link href="/" className="text-2xl font-serif font-medium text-stone-800 tracking-tight">
@@ -137,10 +155,11 @@ export default function Home() {
               <div className="h-4 w-px bg-stone-300" />
               <button
                 onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
-                className="flex items-center gap-2 text-sm text-stone-600 hover:text-stone-900 transition-colors"
+                className="flex items-center gap-2 text-sm text-stone-600 hover:text-stone-900 transition-all px-3 py-1.5 rounded-full hover:bg-stone-200/50"
+                title={lang === 'en' ? 'Switch to Chinese' : 'Switch to English'}
               >
                 <Globe size={16} />
-                {lang === 'en' ? '中文' : 'EN'}
+                <span className="font-medium">{lang === 'en' ? '中文' : 'EN'}</span>
               </button>
             </div>
 
@@ -169,10 +188,10 @@ export default function Home() {
               </Link>
               <button
                 onClick={() => { setLang(lang === 'en' ? 'zh' : 'en'); setMobileMenuOpen(false); }}
-                className="flex items-center gap-2 text-stone-600"
+                className="flex items-center gap-2 text-stone-600 hover:text-stone-900 transition-all px-3 py-2 rounded-full hover:bg-stone-200/50"
               >
                 <Globe size={16} />
-                {lang === 'en' ? '切换到中文' : 'Switch to English'}
+                <span className="font-medium">{lang === 'en' ? '切换到中文' : 'Switch to English'}</span>
               </button>
             </div>
           </div>
