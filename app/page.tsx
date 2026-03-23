@@ -49,15 +49,18 @@ const images = {
   footer: 'https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?w=1920&q=80'
 }
 
-// Nightfall Logo
+// Nightfall Logo - Optimized for full visibility
 function NightfallLogo({ className = "h-8" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 140 40" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18 6C18 6 14 4 10 6C6 8 4 12 4 16C4 20 6 24 10 26C14 28 18 26 18 26" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M26 10L26.5 11L27.5 11L26.5 11.5L26 12.5L25.5 11.5L24.5 11L25.5 11L26 10Z" fill="currentColor"/>
-      <path d="M32 18L32.4 18.8L33.2 18.8L32.4 19.2L32 20L31.6 19.2L30.8 19.2L31.6 18.8L32 18Z" fill="currentColor" opacity="0.7"/>
-      <path d="M28 6L28.4 6.8L29.2 6.8L28.4 7.2L28 8L27.6 7.2L26.8 7.2L27.6 6.8L28 6Z" fill="currentColor" opacity="0.5"/>
-      <text x="42" y="26" fontFamily="Georgia, serif" fontSize="20" fontWeight="500" fill="currentColor" letterSpacing="3">NIGHTFALL</text>
+    <svg viewBox="0 0 160 40" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Crescent Moon */}
+      <path d="M20 8C20 8 16 5 12 7C8 9 6 13 6 17C6 21 8 25 12 27C16 29 20 26 20 26" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      {/* Small Stars */}
+      <path d="M28 10L28.5 11L29.5 11L28.5 11.5L28 12.5L27.5 11.5L26.5 11L27.5 11L28 10Z" fill="currentColor"/>
+      <path d="M34 18L34.4 18.8L35.2 18.8L34.4 19.2L34 20L33.6 19.2L32.8 19.2L33.6 18.8L34 18Z" fill="currentColor" opacity="0.7"/>
+      <path d="M30 6L30.4 6.8L31.2 6.8L30.4 7.2L30 8L29.6 7.2L28.8 7.2L29.6 6.8L30 6Z" fill="currentColor" opacity="0.5"/>
+      {/* Brand Name - NIGHTFALL */}
+      <text x="44" y="28" fontFamily="Georgia, serif" fontSize="22" fontWeight="500" fill="currentColor" letterSpacing="4">NIGHTFALL</text>
     </svg>
   )
 }
