@@ -1,5 +1,9 @@
 'use client'
 
+// 构建: build-1774362568-a167ea4f
+// 时间: 2026-03-24T22:29:28+08:00
+// 强制全新构建
+
 import { useState, useEffect } from 'react'
 import { Heart, MessageCircle, Upload, X, Image as ImageIcon, User, Globe, ChevronRight, Star, Home as HomeIcon } from 'lucide-react'
 
