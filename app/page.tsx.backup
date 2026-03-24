@@ -49,7 +49,6 @@ const images = {
   footer: 'https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?w=1920&q=80'
 }
 
-<<<<<<< HEAD
 // Nightfall Logo - Updated version with sleeping cat on crescent moon
 function NightfallLogo({ className = "h-8" }: { className?: string }) {
   return (
@@ -115,46 +114,6 @@ function NightfallLogo({ className = "h-8" }: { className?: string }) {
       <text x="70" y="70" fontFamily="'Georgia', serif" fontSize="24" fontWeight="600" fill="#5D4037" letterSpacing="1">
         NIGHTFALL
       </text>
-=======
-// Nightfall Logo - Cat stretching on a crescent moon
-function NightfallLogo({ className = "h-8" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 200 60" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Crescent Moon */}
-      <path d="M30 25C30 25 20 15 10 20C0 25 0 40 10 45C20 50 30 40 30 40" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" fillOpacity="0.1"/>
-      
-      {/* Cat stretching on the moon */}
-      <g transform="translate(15, 20)">
-        {/* Cat body */}
-        <ellipse cx="25" cy="15" rx="12" ry="8" fill="currentColor" fillOpacity="0.9"/>
-        
-        {/* Cat back arch */}
-        <path d="M15 15 Q20 5 25 8 Q30 11 35 15" stroke="currentColor" strokeWidth="2" fill="none"/>
-        
-        {/* Front paws stretching */}
-        <path d="M20 18 L15 25" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        <path d="M30 18 L35 25" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        
-        {/* Back paws */}
-        <path d="M15 20 L10 25" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        <path d="M35 20 L40 25" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        
-        {/* Tail */}
-        <path d="M35 15 Q40 10 45 12 Q50 14 48 20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
-        
-        {/* Ears */}
-        <path d="M20 5 L18 0 L22 0 L20 5" fill="currentColor"/>
-        <path d="M30 5 L28 0 L32 0 L30 5" fill="currentColor"/>
-      </g>
-      
-      {/* Small stars around */}
-      <path d="M50 10L50.5 11L51.5 11L50.5 11.5L50 12.5L49.5 11.5L48.5 11L49.5 11L50 10Z" fill="currentColor" opacity="0.6"/>
-      <path d="M70 15L70.4 15.8L71.2 15.8L70.4 16.2L70 17L69.6 16.2L68.8 16.2L69.6 15.8L70 15Z" fill="currentColor" opacity="0.4"/>
-      <path d="M10 5L10.4 5.8L11.2 5.8L10.4 6.2L10 7L9.6 6.2L8.8 6.2L9.6 5.8L10 5Z" fill="currentColor" opacity="0.5"/>
-      
-      {/* Brand Name - NIGHTFALL */}
-      <text x="60" y="55" fontFamily="Georgia, serif" fontSize="20" fontWeight="500" fill="currentColor" letterSpacing="2">NIGHTFALL</text>
->>>>>>> 1fa442e88e8bbc6d428a1704a637a3d0ad59de3b
     </svg>
   )
 }

@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { Moon, Heart, Home as HomeIcon, ArrowRight, Globe, Menu, X, ChevronDown, Check, Star } from 'lucide-react'
+// 暂时注释掉UGCGallery导入，需要时取消注释
+import UGCGallery from '@/components/UGCGallery'
 
 const translations: Record<string, any> = {
   en: {
@@ -373,6 +375,86 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* UGC Community Section */}
+        <section id="community" className={`py-32 px-6 bg-white/80 backdrop-blur-sm transition-all duration-1000 ${visibleSections.has('community') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-3 mb-6 text-stone-500">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-100 to-stone-100 flex items-center justify-center">
+                  <Heart size={24} strokeWidth={1.5} className="text-stone-700" />
+                </div>
+                <span className="text-sm tracking-[0.2em] uppercase">Community Love</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6">宠物家长的真实分享</h2>
+              <p className="text-lg text-stone-600 max-w-2xl mx-auto">
+                看看其他宠物家长如何与他们的毛孩子享受Nightfall带来的温暖时光
+              </p>
+            </div>
+            
+            {/* UGC Gallery Preview */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              {[
+                {
+                  image: 'https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=400&q=80',
+                  username: '猫咪小管家',
+                  caption: '每晚都要穿睡衣才肯睡觉'
+                },
+                {
+                  image: 'https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=400&q=80',
+                  username: '金毛爸爸',
+                  caption: '材质真的很舒服，狗狗不抗拒'
+                },
+                {
+                  image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&q=80',
+                  username: '多宠家庭',
+                  caption: '家里所有宠物都爱上了Nightfall'
+                }
+              ].map((item, index) => (
+                <div key={index} className="group cursor-pointer">
+                  <div className="aspect-square rounded-2xl overflow-hidden mb-4 relative">
+                    <img
+                      src={item.image}
+                      alt={item.caption}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-medium text-stone-900">{item.username}</p>
+                    <p className="text-sm text-stone-500">{item.caption}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <button 
+                onClick={() => {
+                  // 这里可以添加跳转到完整UGC页面的逻辑
+                  const communitySection = document.getElementById('ugc-full');
+                  if (communitySection) {
+                    communitySection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="inline-flex items-center gap-2 border-2 border-stone-900 text-stone-900 px-8 py-4 rounded-full hover:bg-stone-900 hover:text-white transition-all duration-300"
+              >
+                <span>查看更多分享</span>
+                <ArrowRight size={18} />
+              </button>
+              <p className="text-sm text-stone-500 mt-4">
+                已有 <span className="font-medium text-stone-900">128</span> 位宠物家长分享了他们的故事
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Full UGC Gallery - 这里可以放置完整的UGC组件 */}
+        <div id="ugc-full" className="min-h-screen">
+          {/* 完整的UGC画廊组件可以在这里渲染 */}
+          {/* 暂时注释掉，需要时取消注释 */}
+          <UGCGallery />
+        </div>
 
         {/* Footer */}
         <footer id="about" className="py-20 px-6 bg-stone-900 text-stone-400 relative overflow-hidden">
