@@ -430,10 +430,17 @@ export default function Home() {
             <div className="text-center">
               <button 
                 onClick={() => {
-                  // 这里可以添加跳转到完整UGC页面的逻辑
-                  const communitySection = document.getElementById('ugc-full');
-                  if (communitySection) {
-                    communitySection.scrollIntoView({ behavior: 'smooth' });
+                  const element = document.getElementById('ugc-full')
+                  if (element) {
+                    // 平滑滚动到UGC完整画廊
+                    element.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    })
+                    // 添加偏移避免导航栏遮挡
+                    setTimeout(() => {
+                      window.scrollBy(0, -80)
+                    }, 300)
                   }
                 }}
                 className="inline-flex items-center gap-2 border-2 border-stone-900 text-stone-900 px-8 py-4 rounded-full hover:bg-stone-900 hover:text-white transition-all duration-300"
