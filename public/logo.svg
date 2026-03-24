@@ -1,0 +1,50 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iconMoon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B4513"/>
+      <stop offset="100%" stop-color="#D2691E"/>
+    </linearGradient>
+    <linearGradient id="iconCat" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A0522D"/>
+      <stop offset="100%" stop-color="#CD853F"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 圆形背景 -->
+  <circle cx="100" cy="100" r="95" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="2"/>
+  
+  <!-- 月牙 -->
+  <path d="M70 100 
+           C60 80, 40 85, 35 100 
+           C30 115, 40 130, 60 135 
+           C80 140, 95 130, 100 110 
+           C105 90, 90 95, 70 100Z" 
+        fill="url(#iconMoon)" 
+        stroke="#5D4037" 
+        stroke-width="1.5"/>
+  
+  <!-- 简化的小猫（睡觉姿势） -->
+  <g transform="translate(60, 75) scale(0.7)">
+    <!-- 身体 -->
+    <ellipse cx="50" cy="60" rx="25" ry="18" fill="url(#iconCat)" stroke="#5D4037" stroke-width="1"/>
+    
+    <!-- 头部 -->
+    <circle cx="50" cy="35" r="15" fill="url(#iconCat)" stroke="#5D4037" stroke-width="1"/>
+    
+    <!-- 耳朵 -->
+    <path d="M40 25 L45 15 L50 25" fill="#5D4037"/>
+    <path d="M60 25 L65 15 L70 25" fill="#5D4037"/>
+    
+    <!-- 闭着的眼睛 -->
+    <path d="M45 33 Q48 35 51 33" stroke="#5D4037" stroke-width="1.2" fill="none"/>
+    <path d="M55 33 Q58 35 61 33" stroke="#5D4037" stroke-width="1.2" fill="none"/>
+    
+    <!-- 鼻子 -->
+    <circle cx="50" cy="40" r="1.5" fill="#FF6B6B"/>
+  </g>
+  
+  <!-- 品牌名缩写 -->
+  <text x="100" y="170" text-anchor="middle" font-family="'Georgia', serif" font-size="20" font-weight="600" fill="#5D4037">
+    NF
+  </text>
+</svg>
