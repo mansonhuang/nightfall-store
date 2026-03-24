@@ -48,15 +48,15 @@ export default function UGCAdmin() {
           
           // 计算统计
           const today = new Date().toISOString().split('T')[0]
-          const todayItems = itemsWithStatus.filter(item => 
+          const todayItems = itemsWithStatus.filter((item: any) => 
             item.timestamp.includes('刚刚') || item.timestamp.includes('小时前')
           )
           
           setStats({
             total: itemsWithStatus.length,
-            pending: itemsWithStatus.filter(item => item.status === 'pending').length,
-            approved: itemsWithStatus.filter(item => item.status === 'approved').length,
-            rejected: itemsWithStatus.filter(item => item.status === 'rejected').length,
+            pending: itemsWithStatus.filter((item: any) => item.status === 'pending').length,
+            approved: itemsWithStatus.filter((item: any) => item.status === 'approved').length,
+            rejected: itemsWithStatus.filter((item: any) => item.status === 'rejected').length,
             today: todayItems.length
           })
         }
@@ -81,7 +81,7 @@ export default function UGCAdmin() {
       setStats(prev => ({
         ...prev,
         pending: prev.pending - 1,
-        approved: prev.appended + 1
+        approved: prev.approved + 1
       }))
     } catch (error) {
       console.error('审核失败:', error)
