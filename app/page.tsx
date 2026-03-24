@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { Moon, Heart, Home as HomeIcon, ArrowRight, Globe, Menu, X, ChevronDown, Check, Star } from 'lucide-react'
-// 暂时注释掉UGCGallery导入，需要时取消注释
 import UGCGallery from '@/components/UGCGallery'
 
 const translations: Record<string, any> = {
