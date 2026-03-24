@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "build": {
+    "env": {
+      "NEXT_TELEMETRY_DISABLED": "1",
+      "FORCE_FRESH_BUILD": "true",
+      "BUILD_ID": "$BUILD_ID"
+    }
+  },
+  "installCommand": "npm ci --no-cache",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "cleanUrls": true,
+  "trailingSlash": false
+}
